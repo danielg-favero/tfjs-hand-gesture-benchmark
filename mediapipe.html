@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+    <title>Media Pipe</title>
+</head>
+<body>
+    <main>
+        <section>
+            <div class="webcam-container">
+                <video playsinline muted id="camera"></video>
+                <canvas class="webcam_canvas" id="output_canvas"></canvas>
+            </div>
+            <h2>Left Score: <span id="left-score"></span></h2>
+            <h2>Right Score: <span id="right-score"></span></h2>
+        </section>
+        <section id="click" class="gesture-images">
+            <h1>Clique <span class="status"></span></h1>
+            <h2>Mão Direta</h2>
+            <div class="images-grid">
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/click/right/1.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/click/right/3.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/click/right/4.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/click/right/5.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/click/right/6.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/click/right/7.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/click/right/8.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/click/right/9.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/click/right/10.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/click/right/2.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+            </div>
+            <hr></hr>
+            <h2>Mão Esquerda</h2>
+            <div class="images-grid">
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/click/left/1.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/click/left/3.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/click/left/4.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/click/left/5.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/click/left/6.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/click/left/7.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/click/left/8.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/click/left/9.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/click/left/10.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/click/left/2.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+            </div>
+        </section>
+        <section id="go-back" class="gesture-images">
+            <h1>Voltar atrás <span class="status"></span></h1>
+            <h2>Mão Direta</h2>
+            <div class="right images-grid">
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/go-back/right/1.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/go-back/right/2.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/go-back/right/3.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/go-back/right/4.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/go-back/right/5.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/go-back/right/6.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/go-back/right/7.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/go-back/right/8.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/go-back/right/9.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/go-back/right/10.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+            </div>
+            <hr></hr>
+            <h2>Mão Esquerda</h2>
+            <div class="left images-grid">
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/go-back/left/1.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/go-back/left/2.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/go-back/left/3.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/go-back/left/4.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/go-back/left/5.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/go-back/left/6.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/go-back/left/7.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/go-back/left/8.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/go-back/left/9.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/go-back/left/10.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+            </div>
+        </section>
+        <section id="move" class="gesture-images">
+            <h1>Mover <span class="status"></span></h1>
+            <h2>Mão Direta</h2>
+            <div class="right images-grid">
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/move/right/1.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/move/right/2.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/move/right/3.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/move/right/4.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/move/right/5.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/move/right/6.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/move/right/7.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/move/right/8.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/move/right/9.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/move/right/10.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+            </div>
+            <hr></hr>
+            <h2>Mão Esquerda</h2>
+            <div class="left images-grid">
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/move/left/1.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/move/left/2.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/move/left/3.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/move/left/4.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/move/left/5.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/move/left/6.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/move/left/7.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/move/left/8.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/move/left/9.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/move/left/10.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+            </div>
+        </section>
+        <section id="scroll-down" class="gesture-images">
+            <h1>Rolar para baixo <span class="status"></span></h1>
+            <h2>Mão Direta</h2>
+            <div class="right images-grid">
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-down/right/1.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-down/right/2.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-down/right/3.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-down/right/4.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-down/right/5.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-down/right/6.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-down/right/7.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-down/right/8.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-down/right/9.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-down/right/10.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+            </div>
+            <hr></hr>
+            <h2>Mão Esquerda</h2>
+            <div class="left images-grid">
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-down/left/1.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-down/left/2.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-down/left/3.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-down/left/4.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-down/left/5.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-down/left/6.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-down/left/7.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-down/left/8.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-down/left/9.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-down/left/10.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+            </div>
+        </section>
+        <section id="scroll-up" class="gesture-images">
+            <h1>Rolar para cima <span class="status"></span></h1>
+            <h2>Mão Direta</h2>
+            <div class="right images-grid">
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-up/right/1.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-up/right/2.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-up/right/3.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-up/right/4.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-up/right/5.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-up/right/6.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-up/right/7.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-up/right/8.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-up/right/9.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-up/right/10.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+            </div>
+            <hr></hr>
+            <h2>Mão Esquerda</h2>
+            <div class="left images-grid">
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-up/left/1.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-up/left/2.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-up/left/3.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-up/left/4.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-up/left/5.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-up/left/6.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-up/left/7.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-up/left/8.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-up/left/9.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+                <div class="imageContainer">
+                    <img width="180px" height="100" src="/src/data/scroll-up/left/10.jpg">
+                    <h2>Score: <span class="scores"></span></h2>
+                    <h2>Mão: <span class="hands"></span></h2>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script type="module" src="src/mediapipeResults.js"></script>
+</body>
+</html>
