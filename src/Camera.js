@@ -21,10 +21,8 @@ export class Camera {
   }
 
   static draw(video) {
-    video.height = video.videoHeight;
     video.width = video.videoWidth;
-    video.style.width = video.videoWidth;
-    video.style.width = video.videoWidth;
+    video.height = video.videoHeight;
   }
   
   static play(video) {

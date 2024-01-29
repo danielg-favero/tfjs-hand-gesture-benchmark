@@ -46,12 +46,15 @@ const staticImagesResults = async () => {
   const handsTexts = document.querySelectorAll('.imageContainer .hands')
   let avg = 0;
   let sum = 0;
+  let jsonResults = []
 
   for(let i = 0; i < images.length; i++) {
     const results = mediapipeDetector.detector.detect(images[i])
 
     scoresTexts[i].innerHTML = `${results.handednesses[0][0].score.toFixed(4) * 100}%` 
     handsTexts[i].innerHTML = results.handednesses[0][0].categoryName
+
+    jsonResults.push(results)
 
     sum += results.handednesses[0][0].score.toFixed(4) * 100
 
@@ -60,6 +63,14 @@ const staticImagesResults = async () => {
       console.log(avg)
       sum = 0;
       avg = 0;
+
+      var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(jsonResults));
+      var dlAnchorElem = document.createElement('a');
+      dlAnchorElem.setAttribute("href",     dataStr     );
+      dlAnchorElem.setAttribute("download", "results.json");
+      dlAnchorElem.click();
+
+      jsonResults = []
     }
   }
 }
