@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Require the peer dependencies of hand-pose-detection. -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script>
+    
+    <!-- You must explicitly require a TF.js backend if you're not using the TF.js union bundle. -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/hand-pose-detection"></script>
+    
+    <!-- Tailwind -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="base.css">
+    <title>Hand Gesture Models Benchmark</title>
+</head>
+<body>
+    <main>
+        <section class="flex-col gap-16">
+            <div class="flex-col">
+                <h1>Hand Gesture Models Benchmark</h1>
+                <p>Teste de modelos de reconhecimento de landmarks da mão</p>
+            </div>
+            <div class="flex bg-dark-2 p-24 border-radius-24 gap-16">
+                <video playsinline muted id="camera"></video>
+                <canvas class="absolute" id="output_canvas"></canvas>
+                <div>
+                    <p class="score-caption">Left Score: <span id="camera-left-score"></span></p>
+                    <p class="score-caption">Right Score: <span id="camera-right-score"></span></p>
+                </div>
+            </div>
+        </section>
+        <div class="flex justify-content gap-8 width-full">
+            <div>
+                <select>
+                    <option value="0">TFJS</option>
+                    <option value="1">MediaPipe</option>
+                </select>
+                <button class="primary" id="train">Treinar</button>
+                <button class="secondary" id="augment">Augment Data</button>
+            </div>
+            <button class="secondary" id="download">Baixar</button>
+        </div>
+        <section id="gestures-lists">
+
+        </section>
+    </main>
+    <script type="module" src="src/index.js"></script>
+</body>
+</html>

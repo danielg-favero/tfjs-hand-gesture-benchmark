@@ -54,6 +54,8 @@ export class Camera {
       };
     });
 
-    return camera.video;
+    camera.video.play()
+
+    return camera;
   }
 }

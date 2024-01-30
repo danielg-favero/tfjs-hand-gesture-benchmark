@@ -1,128 +1,6 @@
-:root {
-    --color-primary: #00C1D4;
-    --color-secondary: #D45800;
-    --color-neutral-white: #FFF5EA;
-    --color-neutral-dark_1: #181820;
-    --color-neutral-dark_2: #21212B;
-    --color-neutral-dark_3: #414052;
-    --color-neutral-dark_4: #55555D;
-}
+/* Gesture Images */
 
-*, html {
-    padding: 0;
-    margin: 0;
-    border: none;
-    outline: none;
-    overflow-x: hidden;
-    font-family: 'Poppins', sans-serif;
-}
-
-body {
-    background-color: var(--color-neutral-dark_1);
-    color: var(--color-neutral-white);
-    width: 100vw;
-    height: 100vh;
-}
-
-main {
-    padding: 6rem 0;
-    max-width: 90rem;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
-}
-
-video {
-    clear: both;
-    display: block;
-    border-radius: 0.5rem;
-}
-  
-
-button {
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    font-weight: medium;
-    font-size: 1rem;
-    cursor: pointer;
-    height: fit-content;
-    color: var(--color-neutral-white);
-}
-
-button.primary {
-    background-color: var(--color-primary);
-}
-
-button.secondary {
-    background-color: var(--color-neutral-dark_3);
-}
-
-button:hover {
-    opacity: 0.8;
-}
-
-button:active {
-    opacity: 0.5;
-}
-
-button:disabled {
-    cursor: not-allowed;
-    opacity: 0.2;
-    background-color: gray;
-}
-
-button.success{
-    background-color: green;
-}
-
-select {
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    font-weight: medium;
-    font-size: 1rem;
-    cursor: pointer;
-    height: fit-content;
-    color: var(--color-neutral-white);
-    background-color: var(--color-neutral-dark_3);
-}
-
-h1 {
-    font-size: 2.25rem;
-    font-weight: bold;
-}
-
-h2 {
-    font-size: 12px;
-    font-weight: normal;
-    color: darkgrey;
-}
-
-h3 {
-    color: var(--color-neutral-white);
-    font-weight: medium;
-}
-
-img {
-    width: 100%;
-    border-radius: 0.5rem;
-    aspect-ratio: 16 / 9;
-}
-
-.button-group {
-    display: flex;
-    gap: 0.5rem;
-    width: 100%;
-    justify-content: space-between;
-}
-
-.gesture-images {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.images-grid {
+.gestures-images-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 0.75rem;
@@ -131,44 +9,26 @@ img {
     border-radius: 1.5rem;
 }
 
-.imageContainer {
-    width: 100%;
-}
-
-.status {
-    font-size: 0.75rem;
-    font-size: 12px;
-}
-
-.status.loaded {
-    color: gray;
-}
-
-.status.success {
-    color: green;
-}
-
-.webcam-container {
-    display: flex;
-    background-color: var(--color-neutral-dark_2);
-    padding: 1.5rem;
-    border-radius: 1.5rem;
-    gap: 1rem;
-}
-
-.webcam_canvas {
-    position: absolute; 
-    left: 2rem; 
-    top: 2rem;
-}
-
-.hero-section {
+.gesture-image-container {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
 }
 
-.image-caption {
+#gestures-lists {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Caption */
+
+.score-caption {
+    font-weight: normal;
+    font-size: 0.75rem;
+    color: var(--color-neutral-dark_4);
+}
+
+.handedness-caption {
     font-weight: normal;
     font-size: 0.75rem;
     color: var(--color-neutral-dark_4);
