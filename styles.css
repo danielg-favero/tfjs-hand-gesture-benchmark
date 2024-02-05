@@ -14,12 +14,6 @@
     flex-direction: column;
 }
 
-#gestures-lists {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
 /* Caption */
 
 .score-caption {

@@ -8,7 +8,7 @@ const factory = {
             view: new GesturesView(),
             service: new GesturesService({
                 dataFolder: '/src/data'
-            })
+            }),
          })
     }
 }

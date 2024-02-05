@@ -199,7 +199,7 @@ img {
     flex-direction: column;
 }
 
-.justify-content {
+.space-between {
     justify-content: space-between;
 }
 
@@ -215,6 +215,10 @@ img {
 
 .gap-16 {
     gap: 1rem;
+}
+
+.gap-64 {
+    gap: 4rem;
 }
 
 /* Box Style */
@@ -239,6 +243,18 @@ img {
 
 .absolute {
     position: absolute;
+}
+
+.fixed {
+    position: fixed;
+}
+
+.sticky {
+    position: sticky;
+}
+
+.relative {
+    position: relative;
 }
 
 /* Grid */

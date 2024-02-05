@@ -1,20 +1,27 @@
 export default class GesturesView {
     #gesturesLists = document.getElementById("gestures-lists")
 
-    createGestureImage(src) {
+    constructor() {
+        window.totalImages = 0
+    }
+
+    createGestureImage(src, id) {
         const img = document.createElement('img')
         img.src = src
+        img.id = id
 
         return img
     }
 
-    createGestureImageCaptionContainer() {
+    createGestureImageCaptionContainer(id) {
         const scoreCaption = document.createElement('p')
         scoreCaption.className = 'score-caption'
+        scoreCaption.id = `score-caption-${id}`
         scoreCaption.innerText = 'Score: '
 
         const handednessCaption = document.createElement('p')
         handednessCaption.className = 'handedness-caption'
+        handednessCaption.id = `handedness-caption-${id}`
         handednessCaption.innerText = 'Mão: ' 
 
         const captionContainer = document.createElement('div')
@@ -24,12 +31,12 @@ export default class GesturesView {
         return captionContainer
     }
 
-    createGestureImageContainer(src) {
+    createGestureImageContainer(src, id) {
         const gestureImageContainer = document.createElement('div')
         gestureImageContainer.className = 'imageContainer'
 
-        const gestureImage = this.createGestureImage(src)
-        const gestureCaption = this.createGestureImageCaptionContainer()
+        const gestureImage = this.createGestureImage(src, id)
+        const gestureCaption = this.createGestureImageCaptionContainer(id)
 
         gestureImageContainer.appendChild(gestureImage)
         gestureImageContainer.appendChild(gestureCaption)
@@ -43,23 +50,43 @@ export default class GesturesView {
 
         return gestureImageContainersGrid
     }
+
+    createGestureImageContainerHeader(id, title) {
+        const header = document.createElement('div')
+        header.classList = 'flex space-between width-full'
+
+        const headerTitle = document.createElement('h3')
+        headerTitle.innerText = title
+
+        const editButton = document.createElement('button')
+        editButton.innerHTML = 'Editar'
+        editButton.classList = 'secondary'
+        editButton.id = id + '-edit'
+        editButton.disabled = true
+
+        header.appendChild(headerTitle)
+        header.appendChild(editButton)
+
+        return header
+    }
     
     createGestureList(id, title, imagesSrc) {
         const grid = this.createGestureImageContainersGrid()
 
         const gestureList = document.createElement('section')
+        gestureList.classList = 'flex-col gap-16'
         gestureList.id = id
 
-        const heading = document.createElement('h3')
-        heading.innerText = title
-
+        const header = this.createGestureImageContainerHeader(id, title)
         
         for(let src of imagesSrc) {
-            let imageContainer = this.createGestureImageContainer(src)
+            let imageContainer = this.createGestureImageContainer(src, window.totalImages)
             grid.appendChild(imageContainer)
+
+            window.totalImages++
         }
 
-        gestureList.appendChild(heading)
+        gestureList.appendChild(header)
         gestureList.appendChild(grid)
 
         return gestureList

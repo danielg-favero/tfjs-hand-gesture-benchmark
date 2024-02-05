@@ -20,19 +20,6 @@ export class Camera {
     };
   }
 
-  static draw(video) {
-    video.width = video.videoWidth;
-    video.height = video.videoHeight;
-  }
-  
-  static play(video) {
-    video.play();
-  }
-
-  static pause(video) {
-    video.pause();
-  }
-
   static async create() {
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
       throw new Error(

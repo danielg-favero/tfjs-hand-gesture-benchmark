@@ -30,7 +30,7 @@ export class MediaPipeHandDetector {
         modelAssetPath: `https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task`,
         delegate: "GPU",
       },
-      runningMode: "VIDEO",
+      runningMode: "IMAGE",
       numHands: 2
     });
 
@@ -51,8 +51,6 @@ export class MediaPipeHandDetector {
 
       return hands;
     } catch (err) {
-      detector.dispose();
-
       throw new Error(`Houve um erro ao detectar as mãos: ${err}`);
     }
   }
