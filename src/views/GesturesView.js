@@ -1,8 +1,15 @@
 export default class GesturesView {
-    #gesturesLists = document.getElementById("gestures-lists")
+    #gesturesNodesLists = document.getElementById("gestures-lists")
+    downloadButton = document.getElementById("download")
+    estimateButton = document.getElementById("estimate")
+    gesturesImagesList = {}
 
     constructor() {
         window.totalImages = 0
+    }
+
+    insertIntoGesturesImagesList(gesture, img) {
+        this.gesturesImagesList[gesture].push(img)
     }
 
     createGestureImage(src, id) {
@@ -31,14 +38,11 @@ export default class GesturesView {
         return captionContainer
     }
 
-    createGestureImageContainer(src, id) {
+    createGestureImageContainer(id) {
         const gestureImageContainer = document.createElement('div')
         gestureImageContainer.className = 'imageContainer'
 
-        const gestureImage = this.createGestureImage(src, id)
         const gestureCaption = this.createGestureImageCaptionContainer(id)
-
-        gestureImageContainer.appendChild(gestureImage)
         gestureImageContainer.appendChild(gestureCaption)
 
         return gestureImageContainer
@@ -80,7 +84,12 @@ export default class GesturesView {
         const header = this.createGestureImageContainerHeader(id, title)
         
         for(let src of imagesSrc) {
-            let imageContainer = this.createGestureImageContainer(src, window.totalImages)
+            let image = this.createGestureImage(src, window.totalImages)
+            this.insertIntoGesturesImagesList(id, image)
+
+            let imageContainer = this.createGestureImageContainer(window.totalImages)
+            imageContainer.insertBefore(image, imageContainer.firstChild)
+
             grid.appendChild(imageContainer)
 
             window.totalImages++
@@ -92,7 +101,32 @@ export default class GesturesView {
         return gestureList
     }
 
-    addGestureList(id, title, imagesSrc) {
-        this.#gesturesLists.appendChild(this.createGestureList(id, title, imagesSrc))
+    addGestureList(gesture, title, imagesSrc) {
+        this.gesturesImagesList[gesture] = []
+        this.#gesturesNodesLists.appendChild(this.createGestureList(gesture, title, imagesSrc))
+    }
+
+    estimateButtonClickFn(fn) {
+        this.estimateButton.addEventListener('click', fn)
+    }
+
+    downloadButtonClickFn(fn) {
+        this.downloadButton.addEventListener('click', fn)
+    }
+    
+    onDownloadButtonClick(file, fileName) {
+        const dataString = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(file));
+        const anchorElement = document.createElement('a');
+        anchorElement.setAttribute("href", dataString);
+        anchorElement.setAttribute("download", `${fileName}.json`);
+        anchorElement.click()
+    }
+
+    updateGestureImageCaptionContainer(id, data) {
+        const scoreCaption = document.getElementById(`score-caption-${id}`)
+        scoreCaption.innerText = `Score: ${data.score.toFixed(3) * 100}%`
+        
+        const handednessCaption = document.getElementById(`handedness-caption-${id}`)
+        handednessCaption.innerText = `Mão: ${data.handedness}`
     }
 }

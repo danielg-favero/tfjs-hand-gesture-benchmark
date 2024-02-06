@@ -1,7 +1,6 @@
-import gesturesFactory from "./factories/gesturesFactory.js";
+import f from "./factories/gesturesFactory.js";
 import realTimeHandDetectorFactory from "./factories/realTimeHandDetectorFactory.js";
-import estimateGesturesFactory from "./factories/estimateGesturesFactory.js";
 
-gesturesFactory.initialize()
+f.gesturesContainerFactory.initialize()
+f.estimateHandsFactory.initialize()
 realTimeHandDetectorFactory.initialize()
-estimateGesturesFactory.initialize()
